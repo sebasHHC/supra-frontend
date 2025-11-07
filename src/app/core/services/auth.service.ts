@@ -15,7 +15,7 @@ export const currentUserSignal = signal<Usuario | null>(null);
 export class AuthService {
   private http = inject(HttpClient);
   private router = inject(Router);
-  private API = 'http://localhost:3000/api/auth'; // ✅ corregido
+  private API = 'https://supra-backend-30hh.onrender.com/api/auth'; // ✅ corregido
 
   // ✅ Login normal
   login(email: string, password: string) {

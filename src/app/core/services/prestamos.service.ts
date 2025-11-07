@@ -20,7 +20,7 @@ export interface Prestamo {
 @Injectable({ providedIn: 'root' })
 export class PrestamosService {
   private http = inject(HttpClient);
-  private API = 'http://localhost:3000/api/prestamos';
+  private API = 'https://supra-backend-30hh.onrender.com/api/prestamos';
 
   private getHeaders(): { headers: HttpHeaders } {
     const token = localStorage.getItem('token');

@@ -15,7 +15,7 @@ export interface Libro {
 @Injectable({ providedIn: 'root' })
 export class LibrosService {
   private http = inject(HttpClient);
-  private API = 'http://localhost:3000/api/libros';
+  private API = 'https://supra-backend-30hh.onrender.com/api/libros';
 
   private getHeaders(): { headers: HttpHeaders } {
     const token = localStorage.getItem('token');

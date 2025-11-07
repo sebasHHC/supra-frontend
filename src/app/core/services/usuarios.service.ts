@@ -6,7 +6,7 @@ import { Usuario } from './auth.service';
 @Injectable({ providedIn: 'root' })
 export class UsuariosService {
   private http = inject(HttpClient);
-  private API = 'http://localhost:3000/api/usuarios';
+  private API = 'https://supra-backend-30hh.onrender.com/api/usuarios';
 
   private getHeaders(): { headers: HttpHeaders } {
     const token = localStorage.getItem('token');

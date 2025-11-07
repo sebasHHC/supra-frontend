@@ -6,7 +6,7 @@ import { Usuario } from './auth.service'; // Reutilizamos la interfaz
 @Injectable({ providedIn: 'root' })
 export class EstudiantesService {
   private http = inject(HttpClient);
-  private API = 'http://localhost:3000/api/estudiantes';
+  private API = 'https://supra-backend-30hh.onrender.com/api/estudiantes';
 
   private getHeaders(): { headers: HttpHeaders } {
     const token = localStorage.getItem('token');

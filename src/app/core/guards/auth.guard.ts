@@ -1,7 +1,7 @@
 import { CanActivateFn } from '@angular/router';
 import { inject } from '@angular/core';
-import { getCurrentUser } from '../state/user.signal';
 import { Router } from '@angular/router';
+import { getCurrentUser } from '../state/user.signal';
 
 export const canActivateAdmin: CanActivateFn = () => {
   const user = getCurrentUser();

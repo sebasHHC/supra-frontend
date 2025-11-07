@@ -12,22 +12,31 @@ import { currentUserSignal, AuthService } from '../core/services/auth.service';
       <a routerLink="/">📚 Biblioteca</a>
       <a *ngIf="!usuario()" routerLink="/login">🔐 Login</a>
       <a *ngIf="!usuario()" routerLink="/registro">📝 Registro</a>
-      <a *ngIf="usuario()?.rol === 'admin'" routerLink="/admin">👤 Admin</a>
+
+      <!-- Opciones para administrador -->
+      <ng-container *ngIf="usuario()?.rol === 'admin'">
+        <a routerLink="/admin">👤 Admin</a>
+        <a routerLink="/admin/prestamos">📕 Gestionar préstamos</a>
+        <a routerLink="/admin/historial-estudiante">📖 Historial estudiante</a>
+      </ng-container>
+
+      <!-- Opciones para estudiante -->
       <a *ngIf="usuario()?.rol === 'estudiante'" routerLink="/prestamos">📖 Mis Préstamos</a>
-      <button *ngIf="usuario()" (click)="logout()">🚪 deslogear</button>
+
+      <button *ngIf="usuario()" (click)="logout()">🚪 Deslogear</button>
     </nav>
   `,
   styles: [`
   .navbar {
     display: flex;
     flex-wrap: wrap;
-    gap: 1rem;
+    gap: 0.5rem;
     padding: 1rem 2rem;
-    background-color: #f5f7fa;
-    border-bottom: 1px solid #dfe3e8;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+    background-color: #ffffff;
+    border-bottom: 1px solid #e0e0e0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
     font-family: 'Segoe UI', sans-serif;
     position: sticky;
     top: 0;
@@ -35,32 +44,33 @@ import { currentUserSignal, AuthService } from '../core/services/auth.service';
   }
 
   a {
-    font-weight: 600;
-    color: #2c3e50;
+    font-weight: 500;
+    color: #34495e;
     text-decoration: none;
-    padding: 0.6rem 1rem;
-    border-radius: 6px;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    padding: 0.5rem 0.9rem;
+    border-radius: 4px;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    background-color: #f9f9f9;
   }
 
   a:hover {
-    background-color: #e0ebf5;
+    background-color: #dfe6e9;
     transform: translateY(-1px);
   }
 
   button {
-    background-color: transparent;
+    background-color: #fbe9e7;
     border: none;
-    color: #e53935;
+    color: #d32f2f;
     font-weight: 600;
-    padding: 0.6rem 1rem;
-    border-radius: 6px;
+    padding: 0.5rem 0.9rem;
+    border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    transition: background-color 0.2s ease, transform 0.2s ease;
   }
 
   button:hover {
-    background-color: #fbe9e7;
+    background-color: #ffcdd2;
     transform: translateY(-1px);
   }
 

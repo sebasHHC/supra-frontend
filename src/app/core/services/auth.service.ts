@@ -3,19 +3,21 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 export interface Usuario {
+  _id: string;
   nombre: string;
   email: string;
   rol: 'admin' | 'estudiante';
 }
 
-export const currentUserSignal = signal<Usuario | null>(null); 
+export const currentUserSignal = signal<Usuario | null>(null);
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private http = inject(HttpClient);
   private router = inject(Router);
-  private API = 'http://localhost:3000/api/auth';
+  private API = 'http://localhost:3000/api/auth'; // ✅ corregido
 
+  // ✅ Login normal
   login(email: string, password: string) {
     return this.http.post<{ token: string; usuario: Usuario }>(`${this.API}/login`, {
       email,
@@ -23,7 +25,9 @@ export class AuthService {
     });
   }
 
-  registro(nombre: string, email: string, password: string, rol: 'admin' | 'estudiante') {
+  // ✅ Registro forzado como estudiante
+  registro(nombre: string, email: string, password: string) {
+    const rol: 'estudiante' = 'estudiante'; // 🔒 bloqueado
     return this.http.post<{ token: string; usuario: Usuario }>(`${this.API}/registro`, {
       nombre,
       email,
@@ -32,21 +36,29 @@ export class AuthService {
     });
   }
 
-  guardarSesion(token: string, usuario: Usuario) {
+  // ✅ Guardar sesión
+  guardarSesion(token: string, usuario: Usuario): void {
     localStorage.setItem('token', token);
     currentUserSignal.set(usuario);
   }
 
-  logout() {
+  // ✅ Cerrar sesión
+  logout(): void {
     currentUserSignal.set(null);
     localStorage.removeItem('token');
     this.router.navigate(['/login']);
   }
 
-  cargarSesionDesdeStorage() {
+  // ✅ Obtener token actual
+  getToken(): string | null {
+    return localStorage.getItem('token');
+  }
+
+  // ✅ Cargar sesión desde storage (opcional)
+  cargarSesionDesdeStorage(): void {
     const token = localStorage.getItem('token');
     if (token) {
-      
+      // Aquí podrías agregar lógica para validar el token o cargar el usuario desde el backend
     }
   }
 }

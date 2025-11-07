@@ -8,6 +8,10 @@ export interface Prestamo {
     titulo: string;
     autor: string;
   };
+  usuario?: {
+    nombre: string;
+    email: string;
+  };
   fechaPrestamo: string;
   fechaDevolucion?: string;
   estado: 'prestado' | 'devuelto';
@@ -29,12 +33,15 @@ export class PrestamosService {
     return this.http.get<Prestamo[]>(`${this.API}/mios`, this.getHeaders());
   }
 
-  crearPrestamo(libroId: string): Observable<any> {
-    
-    return this.http.post(`${this.API}`, { libroId }, this.getHeaders());
+  obtenerPrestamos(): Observable<Prestamo[]> {
+    return this.http.get<Prestamo[]>(this.API, this.getHeaders());
+  }
+
+  crearPrestamo(data: { libroId: string; usuarioId: string }): Observable<any> {
+    return this.http.post(`${this.API}`, data, this.getHeaders());
   }
 
   devolverPrestamo(id: string): Observable<any> {
-  return this.http.put(`${this.API}/${id}/devolver`, {}, this.getHeaders());
-}
+    return this.http.put(`${this.API}/${id}/devolver`, {}, this.getHeaders());
+  }
 }

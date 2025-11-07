@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { canActivateAdmin, canActivateEstudiante } from './core/guards/auth.guard';
+import { canActivateAdmin } from './core/guards/auth.guard';
 
 export const routes: Routes = [
   {
@@ -33,5 +33,16 @@ export const routes: Routes = [
   {
   path: 'denegado',
   loadComponent: () => import('./features/acceso-denegado/acceso-denegado.component').then(m => m.AccesoDenegadoComponent)
+},
+{
+  path: 'admin/prestamos',
+  loadComponent: () => import('./features/admin2/admin-prestamos.component').then(m => m.AdminPrestamosComponent),
+  //canActivate: [canActivateAdmin]
+},
+{
+  path: 'admin/historial-estudiante',
+  loadComponent: () => import('./features/admin2/admin-historial-estudiante.component').then(m => m.AdminHistorialEstudianteComponent),
+  //canActivate: [canActivateAdmin]
 }
+
 ];

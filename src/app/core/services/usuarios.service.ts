@@ -2,11 +2,12 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Usuario } from './auth.service';
+import { environment } from '../../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class UsuariosService {
   private http = inject(HttpClient);
-  private API = 'https://supra-backend-30hh.onrender.com/api/usuarios';
+  private API = `${environment.apiUrl}/usuarios`; // ✅ URL dinámica según entorno
 
   private getHeaders(): { headers: HttpHeaders } {
     const token = localStorage.getItem('token');

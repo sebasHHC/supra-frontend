@@ -1,6 +1,7 @@
 import { Injectable, inject, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { environment } from '../../../environments/environment';
 
 export interface Usuario {
   _id: string;
@@ -15,7 +16,7 @@ export const currentUserSignal = signal<Usuario | null>(null);
 export class AuthService {
   private http = inject(HttpClient);
   private router = inject(Router);
-  private API = 'https://supra-backend-30hh.onrender.com/api/auth'; // ✅ corregido
+  private API = `${environment.apiUrl}/auth`; // ✅ URL dinámica
 
   // ✅ Login normal
   login(email: string, password: string) {

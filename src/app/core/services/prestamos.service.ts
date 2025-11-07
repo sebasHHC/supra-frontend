@@ -2,6 +2,8 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+import { environment } from '../../../environments/environment';
+
 export interface Prestamo {
   _id: string;
   libro: {
@@ -20,7 +22,7 @@ export interface Prestamo {
 @Injectable({ providedIn: 'root' })
 export class PrestamosService {
   private http = inject(HttpClient);
-  private API = 'https://supra-backend-30hh.onrender.com/api/prestamos';
+  private API = `${environment.apiUrl}/prestamos`; // ✅ URL dinámica
 
   private getHeaders(): { headers: HttpHeaders } {
     const token = localStorage.getItem('token');
@@ -46,12 +48,12 @@ export class PrestamosService {
 
   // ✅ Solicitar préstamo como estudiante
   solicitarPrestamo(libroId: string): Observable<{ mensaje: string }> {
-  return this.http.post<{ mensaje: string }>(
-    `${this.API}/solicitar`,
-    { libroId },
-    this.getHeaders()
-  );
-}
+    return this.http.post<{ mensaje: string }>(
+      `${this.API}/solicitar`,
+      { libroId },
+      this.getHeaders()
+    );
+  }
 
   // ✅ Marcar préstamo como devuelto
   devolverPrestamo(id: string): Observable<{ mensaje: string }> {

@@ -1,6 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 export interface Libro {
   _id: string;
@@ -15,7 +16,7 @@ export interface Libro {
 @Injectable({ providedIn: 'root' })
 export class LibrosService {
   private http = inject(HttpClient);
-  private API = 'https://supra-backend-30hh.onrender.com/api/libros';
+  private API = `${environment.apiUrl}/libros`; // ✅ URL dinámica
 
   private getHeaders(): { headers: HttpHeaders } {
     const token = localStorage.getItem('token');

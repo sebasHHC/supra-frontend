@@ -7,9 +7,12 @@
 /bazel-out
 
 # Node
-/node_modules
-npm-debug.log
-yarn-error.log
+/node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
 
 # IDEs and editors
 .idea/
@@ -30,6 +33,7 @@ yarn-error.log
 
 # Miscellaneous
 /.angular/cache
+/.angular/
 .sass-cache/
 /connect.lock
 /coverage
@@ -37,6 +41,16 @@ yarn-error.log
 testem.log
 /typings
 __screenshots__/
+
+# Environment files
+.env
+
+# Angular CLI and build artefacts
+/.angular-cli.json
+/.ng/
+
+# TypeScript cache
+*.tsbuildinfo
 
 # System files
 .DS_Store

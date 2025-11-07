@@ -1,1 +1,33 @@
-<p>admin-historial-estudiante works!</p>
+<div class="historial">
+  <h2>📖 Historial de Préstamos</h2>
+
+  <label>Selecciona un estudiante:</label>
+ <select formControlName="usuarioId">
+
+    <option value="">-- Seleccionar --</option>
+    <option *ngFor="let e of estudiantes" [value]="e._id">{{ e.nombre }}</option>
+  </select>
+
+  <table *ngIf="prestamos.length > 0">
+    <thead>
+      <tr>
+        <th>Título</th>
+        <th>Autor</th>
+        <th>Fecha préstamo</th>
+        <th>Fecha devolución</th>
+        <th>Estado</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let p of prestamos">
+        <td>{{ p.libro.titulo }}</td>
+        <td>{{ p.libro.autor }}</td>
+        <td>{{ p.fechaPrestamo | date }}</td>
+        <td>{{ p.fechaDevolucion ? (p.fechaDevolucion | date) : '—' }}</td>
+        <td>{{ p.estado }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p *ngIf="prestamos.length === 0 && form.get('usuarioId')?.value">Sin préstamos registrados.</p>
+</div>

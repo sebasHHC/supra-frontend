@@ -44,4 +44,8 @@ export class PrestamosService {
   devolverPrestamo(id: string): Observable<any> {
     return this.http.put(`${this.API}/${id}/devolver`, {}, this.getHeaders());
   }
+
+  obtenerPrestamosPorUsuario(usuarioId: string): Observable<Prestamo[]> {
+  return this.http.get<Prestamo[]>(`${this.API}/usuario/${usuarioId}`, this.getHeaders());
+}
 }

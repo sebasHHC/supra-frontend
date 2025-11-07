@@ -1,0 +1,32 @@
+<h2> Libros registrados</h2>
+
+<table class="tabla-libros">
+  <thead>
+    <tr>
+      <th>Título</th>
+      <th>Autor</th>
+      <th>Disponible</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let libro of libros">
+      <td>{{ libro.titulo }}</td>
+      <td>{{ libro.autor }}</td>
+      <td>
+        <span [ngClass]="libro.disponible ? 'disponible' : 'no-disponible'">
+          {{ libro.disponible ? ' Sí' : ' No' }}
+        </span>
+      </td>
+      <td>
+        <button class="btn-eliminar" (click)="eliminar(libro._id!)">
+           Eliminar
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div *ngIf="libros.length === 0" style="text-align: center; margin-top: 2rem;">
+  <p>No hay libros registrados.</p>
+</div>

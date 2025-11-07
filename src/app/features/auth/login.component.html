@@ -1,0 +1,11 @@
+<form [formGroup]="form" (ngSubmit)="login()">
+  <label>Email</label>
+  <input formControlName="email" type="email" />
+  <div *ngIf="form.get('email')?.errors?.['required']">Email requerido</div>
+
+  <label>Contraseña</label>
+  <input formControlName="password" type="password" />
+  <div *ngIf="form.get('password')?.errors?.['required']">Contraseña requerida</div>
+
+  <button type="submit">Ingresar</button>
+</form>

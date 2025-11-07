@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:3000/api' // ✅ solo para desarrollo local
+  apiUrl: 'https://supra-backend-30hh.onrender.com/api' // ✅ solo para desarrollo local
 };

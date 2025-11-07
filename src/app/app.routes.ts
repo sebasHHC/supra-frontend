@@ -43,6 +43,11 @@ export const routes: Routes = [
   path: 'admin/historial-estudiante',
   loadComponent: () => import('./features/admin2/admin-historial-estudiante.component').then(m => m.AdminHistorialEstudianteComponent),
   //canActivate: [canActivateAdmin]
+},
+
+{
+  path: 'solicitudes',
+  loadComponent: () => import('./features/admin2/admin-solicitudes.component').then(m => m.AdminSolicitudesComponent)
 }
 
 ];

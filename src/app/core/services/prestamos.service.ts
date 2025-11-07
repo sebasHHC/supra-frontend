@@ -29,23 +29,37 @@ export class PrestamosService {
     };
   }
 
+  // ✅ Préstamos del usuario autenticado
   obtenerMisPrestamos(): Observable<Prestamo[]> {
     return this.http.get<Prestamo[]>(`${this.API}/mios`, this.getHeaders());
   }
 
+  // ✅ Todos los préstamos (admin)
   obtenerPrestamos(): Observable<Prestamo[]> {
     return this.http.get<Prestamo[]>(this.API, this.getHeaders());
   }
 
-  crearPrestamo(data: { libroId: string; usuarioId: string }): Observable<any> {
-    return this.http.post(`${this.API}`, data, this.getHeaders());
+  // ✅ Crear préstamo como admin
+  crearPrestamo(data: { libroId: string; usuarioId: string }): Observable<{ mensaje: string }> {
+    return this.http.post<{ mensaje: string }>(`${this.API}`, data, this.getHeaders());
   }
 
-  devolverPrestamo(id: string): Observable<any> {
-    return this.http.put(`${this.API}/${id}/devolver`, {}, this.getHeaders());
-  }
-
-  obtenerPrestamosPorUsuario(usuarioId: string): Observable<Prestamo[]> {
-  return this.http.get<Prestamo[]>(`${this.API}/usuario/${usuarioId}`, this.getHeaders());
+  // ✅ Solicitar préstamo como estudiante
+  solicitarPrestamo(libroId: string): Observable<{ mensaje: string }> {
+  return this.http.post<{ mensaje: string }>(
+    `${this.API}/solicitar`,
+    { libroId },
+    this.getHeaders()
+  );
 }
+
+  // ✅ Marcar préstamo como devuelto
+  devolverPrestamo(id: string): Observable<{ mensaje: string }> {
+    return this.http.put<{ mensaje: string }>(`${this.API}/${id}/devolver`, {}, this.getHeaders());
+  }
+
+  // ✅ Historial por estudiante (admin)
+  obtenerPrestamosPorUsuario(usuarioId: string): Observable<Prestamo[]> {
+    return this.http.get<Prestamo[]>(`${this.API}/usuario/${usuarioId}`, this.getHeaders());
+  }
 }
